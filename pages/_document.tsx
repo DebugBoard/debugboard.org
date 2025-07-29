@@ -15,6 +15,7 @@ export default function Document() {
 				<meta name="msapplication-config" content="/icons/browserconfig.xml" />
 				<meta name="theme-color" content="#0c0e10" />
 				<meta name="darkreader" content="stfu" />
+				<meta name="darkreader-lock" />
 			</Head>
 			<body className="antialiased font-inter bg-gray-50 text-gray-500 dark:bg-gray-900 selection:(bg-gray-900 dark:bg-white text-white dark:text-primary-500)">
 				<Main />
