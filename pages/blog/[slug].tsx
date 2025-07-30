@@ -58,7 +58,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 						images: [
 							{
 								url: `https://debugboard.org${post.frontmatter.banner ?? '/favicon.ico'}`,
-								alt: post.frontmatter.description,
+									alt: post.frontmatter.description,
 							},
 						],
 					},

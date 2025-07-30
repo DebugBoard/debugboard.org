@@ -50,28 +50,6 @@ export default function App({ Component, pageProps }: AppProps) {
 				#tsparticles > canvas {
 					filter: var(--tsparticles-blur);
 				}
-				.scrollbar-hide {
-					-ms-overflow-style: none;
-					scrollbar-width: none;
-				}
-				.scrollbar-hide::-webkit-scrollbar {
-					display: none;
-				}
-				/* Hide all scrollbars globally */
-				* {
-					scrollbar-width: none;
-					-ms-overflow-style: none;
-				}
-				*::-webkit-scrollbar {
-					display: none;
-				}
-				html, body {
-					scrollbar-width: none;
-					-ms-overflow-style: none;
-				}
-				html::-webkit-scrollbar, body::-webkit-scrollbar {
-					display: none;
-				}
 			`}</style>
 		</ThemeProvider>
 	);

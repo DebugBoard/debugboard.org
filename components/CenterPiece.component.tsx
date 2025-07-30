@@ -1,6 +1,6 @@
 export default function CenterPiece() {
   return (
-    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+    <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <style dangerouslySetInnerHTML={{
         __html: `
           @font-face {
@@ -29,7 +29,7 @@ export default function CenterPiece() {
         `
       }} />
 
-      <div className="flex w-full flex-col items-center justify-center relative z-10 center-piece-container" style={{ maxWidth: '505px', marginTop: '20px' }}>
+      <div className="flex w-full flex-col items-center justify-center relative z-10 center-piece-container" style={{ maxWidth: '505px' }}>
         <div
           style={{
             background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
