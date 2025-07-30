@@ -60,13 +60,13 @@ export default function ProjectsPage({ stringifiedProjects }: ProjectProps) {
 												label: 'Private Repository',
 												title: 'Private',
 												onClick: () => { }, // Do nothing when clicked
-											}]
+											} as ListAction]
 											: [{
 												type: ListActionType.LINK,
 												href: project.url,
 												icon: 'feather:github',
 												label: 'GitHub Repository',
-											}]),
+											} as ListAction]),
 									]}
 									description={project.description}
 									icon={<span className="text-xl">{project.icon}</span>}
