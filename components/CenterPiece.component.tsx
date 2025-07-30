@@ -20,10 +20,16 @@ export default function CenterPiece() {
           ::-webkit-scrollbar {
             display: none;
           }
+          /* Ensure proper spacing on mobile */
+          @media (max-width: 767px) {
+            .center-piece-container {
+              padding-bottom: 2rem;
+            }
+          }
         `
       }} />
 
-      <div className="flex w-full flex-col items-center justify-center relative z-10" style={{ maxWidth: '505px' }}>
+      <div className="flex w-full flex-col items-center justify-center relative z-10 center-piece-container" style={{ maxWidth: '505px' }}>
         <div
           style={{
             background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',

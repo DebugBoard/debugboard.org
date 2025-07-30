@@ -9,31 +9,26 @@ export function useSeoProps(
 	const router = useRouter();
 
 	const title = 'DebugBoard';
-	const description = "Hey 👋 I'm WillyJL, a developer";
+	const description = "DebugBoard.org";
 
 	return {
 		title,
 		description,
-		canonical: `https://willyjl.dev${router.asPath}`,
+		canonical: `https://debugboard.org${router.asPath}`,
 		openGraph: {
 			title,
 			description,
 			site_name: 'DebugBoard',
-			url: `https://willyjl.dev${router.asPath}`,
+			url: `https://debugboard.org${router.asPath}`,
 			type: 'website',
 			images: [
 				{
-					url: 'https://willyjl.dev/banner.png',
+					url: 'https://debugboard.org/banner.png',
 					alt: description,
 					width: 1280,
 					height: 720,
 				},
 			],
-		},
-		twitter: {
-			cardType: 'summary_large_image',
-			handle: '@WillyJL_',
-			site: '@WillyJL_',
 		},
 		...props,
 	};

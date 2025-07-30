@@ -57,7 +57,7 @@ export default function BlogPost({ post }: BlogPostProps) {
 						type: 'article',
 						images: [
 							{
-								url: `https://willyjl.dev${post.frontmatter.banner ?? '/banner.png'}`,
+								url: `https://debugboard.org${post.frontmatter.banner ?? '/banner.png'}`,
 								alt: post.frontmatter.description,
 							},
 						],

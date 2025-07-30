@@ -29,13 +29,6 @@ const ACTIONS: Array<NavigationItem> = [
 		icon: <Icon className="mr-3" icon="feather:edit-3" />,
 		text: 'Blog',
 	},
-	{
-		type: NavigationItemType.LINK,
-		external: true,
-		href: 'https://linktr.ee/WillyJL',
-		icon: <Icon className="mr-3" icon="feather:link" />,
-		text: 'Links',
-	},
 ];
 
 export default function HomePage() {
@@ -50,9 +43,20 @@ export default function HomePage() {
 
 	return (
 		<Layout.Default>
+			<style dangerouslySetInnerHTML={{
+				__html: `
+					/* Disable scrolling on desktop for home page */
+					@media (min-width: 768px) {
+						body {
+							overflow: hidden;
+						}
+					}
+				`
+			}} />
 			{isBirthday && <Event event={EventType.BIRTHDAY} />}
 			<CenterPiece />
-			<div className="flex justify-center items-center -mt-48 mb-16 relative z-50">
+			{/* Responsive positioning: negative margin on desktop, positive margin on mobile */}
+			<div className="flex justify-center items-center mt-8 sm:mt-16 md:-mt-48 mb-16 relative z-50">
 				<div className="w-full max-w-sm mx-auto px-4">
 					<Status.Widget />
 				</div>
