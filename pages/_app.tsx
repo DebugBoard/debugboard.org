@@ -57,6 +57,21 @@ export default function App({ Component, pageProps }: AppProps) {
 				.scrollbar-hide::-webkit-scrollbar {
 					display: none;
 				}
+				/* Hide all scrollbars globally */
+				* {
+					scrollbar-width: none;
+					-ms-overflow-style: none;
+				}
+				*::-webkit-scrollbar {
+					display: none;
+				}
+				html, body {
+					scrollbar-width: none;
+					-ms-overflow-style: none;
+				}
+				html::-webkit-scrollbar, body::-webkit-scrollbar {
+					display: none;
+				}
 			`}</style>
 		</ThemeProvider>
 	);
