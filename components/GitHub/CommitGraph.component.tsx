@@ -38,7 +38,7 @@ export const CommitGraph: React.FC<CommitGraphProps> = ({
 	const twelveMonthsAgo = getTwelveMonthsAgo();
 
 	// Function to filter contributions to only show the last 12 months
-	const transformData = (contributions: Array<{ date: string; count: number; level: number }>) => {
+	const transformData = (contributions: Array<{ date: string; count: number; level: 0 | 1 | 2 | 3 | 4 }>) => {
 		return contributions.filter(day => {
 			const date = new Date(day.date);
 			return date >= twelveMonthsAgo;
@@ -144,7 +144,31 @@ export const CommitGraph: React.FC<CommitGraphProps> = ({
 	}, [isLoading]);
 
 	return (
-		<div ref={outerContainerRef} className="w-full py-4 flex justify-center">
+		<div ref={outerContainerRef} className="w-full py-4 flex justify-center relative">
+			{/* Left Arrow */}
+			<button
+				onClick={scrollLeft}
+				className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200 backdrop-blur-sm border border-white/20 shadow-lg"
+				aria-label="Scroll backward in time"
+				type="button"
+			>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+				</svg>
+			</button>
+
+			{/* Right Arrow */}
+			<button
+				onClick={scrollRight}
+				className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200 backdrop-blur-sm border border-white/20 shadow-lg"
+				aria-label="Scroll forward in time"
+				type="button"
+			>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+				</svg>
+			</button>
+
 			<div
 				ref={calendarRef}
 				className="relative w-full"
@@ -158,71 +182,45 @@ export const CommitGraph: React.FC<CommitGraphProps> = ({
 						<div className="animate-pulse text-gray-400">Loading contribution data...</div>
 					</div>
 				) : (
-					<>
-						{/* Left Arrow */}
-						<button
-							onClick={scrollLeft}
-							className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200 backdrop-blur-sm border border-white/20 shadow-lg"
-							aria-label="Scroll backward in time"
-							type="button"
-						>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-							</svg>
-						</button>
-
-						{/* Right Arrow */}
-						<button
-							onClick={scrollRight}
-							className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-3 transition-all duration-200 backdrop-blur-sm border border-white/20 shadow-lg"
-							aria-label="Scroll forward in time"
-							type="button"
-						>
-							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-							</svg>
-						</button>
-
+					<div
+						ref={scrollContainerRef}
+						className="overflow-x-auto w-full"
+						style={{
+							scrollBehavior: 'smooth'
+						}}
+					>
 						<div
-							ref={scrollContainerRef}
-							className="overflow-x-auto w-full"
 							style={{
-								scrollBehavior: 'smooth'
+								backgroundColor: 'rgba(255, 255, 255, 0.05)',
+								borderRadius: '50px',
+								borderColor: 'rgba(255, 255, 255, 0.05)',
+								borderWidth: '1.5px',
+								width: '100%',
+								minWidth: '800px', // Ensure content is wide enough to scroll
+								maxWidth: '100%'
 							}}
+							className="p-4 shadow-[0_0_10px_#0000001a]"
 						>
-							<div
-								style={{
-									backgroundColor: 'rgba(255, 255, 255, 0.05)',
-									borderRadius: '50px',
-									borderColor: 'rgba(255, 255, 255, 0.05)',
-									borderWidth: '1.5px',
-									width: '100%',
-									minWidth: '800px', // Ensure content is wide enough to scroll
-									maxWidth: '100%'
+							<GitHubCalendar
+								username={username}
+								year={year}
+								blockSize={12}
+								blockMargin={4}
+								fontSize={12}
+								colorScheme={colorScheme}
+								theme={{
+									light: ['#ebedf0', '#39d353'],
+									dark: ['#161b22', '#39d353']
 								}}
-								className="p-4 shadow-[0_0_10px_#0000001a]"
-							>
-								<GitHubCalendar
-									username={username}
-									year={year}
-									blockSize={12}
-									blockMargin={4}
-									fontSize={12}
-									colorScheme={colorScheme}
-									theme={{
-										light: ['#ebedf0', '#39d353'],
-										dark: ['#161b22', '#39d353']
-									}}
-									transformData={transformData}
-									hideMonthLabels={false}
-									labels={{
-										totalCount: `{{count}} contributions in the last ${monthsToShow} months`,
-									}}
-									errorMessage="Failed to load GitHub contribution data"
-								/>
-							</div>
+								transformData={transformData}
+								hideMonthLabels={false}
+								labels={{
+									totalCount: `{{count}} contributions in the last ${monthsToShow} months`,
+								}}
+								errorMessage="Failed to load GitHub contribution data"
+							/>
 						</div>
-					</>
+					</div>
 				)}
 			</div>
 		</div>

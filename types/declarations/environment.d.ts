@@ -23,3 +23,5 @@ declare global {
 		githubCalendarHeight?: number;
 	}
 }
+
+export {};
