@@ -50,6 +50,13 @@ export default function App({ Component, pageProps }: AppProps) {
 				#tsparticles > canvas {
 					filter: var(--tsparticles-blur);
 				}
+				.scrollbar-hide {
+					-ms-overflow-style: none;
+					scrollbar-width: none;
+				}
+				.scrollbar-hide::-webkit-scrollbar {
+					display: none;
+				}
 			`}</style>
 		</ThemeProvider>
 	);

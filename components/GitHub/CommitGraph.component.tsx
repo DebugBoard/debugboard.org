@@ -184,9 +184,11 @@ export const CommitGraph: React.FC<CommitGraphProps> = ({
 				) : (
 					<div
 						ref={scrollContainerRef}
-						className="overflow-x-auto w-full"
+						className="overflow-x-auto w-full scrollbar-hide"
 						style={{
-							scrollBehavior: 'smooth'
+							scrollBehavior: 'smooth',
+							scrollbarWidth: 'none', // Firefox
+							msOverflowStyle: 'none', // Internet Explorer 10+
 						}}
 					>
 						<div
