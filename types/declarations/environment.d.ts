@@ -17,3 +17,9 @@ namespace NodeJS {
 		GITHUB_PAT: string;
 	}
 }
+
+declare global {
+	interface Window {
+		githubCalendarHeight?: number;
+	}
+}

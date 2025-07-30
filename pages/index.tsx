@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { differenceInYears } from 'date-fns';
 import { Icon } from '@iconify/react';
 
-import { Animate, Button, Pill, CenterPiece, Status } from '~/components';
+import { Animate, Button, Pill, CenterPiece, Status, GitHub } from '~/components';
 import { EventType, NavigationItemType } from '~/types';
 import { Layout } from '~/layouts';
 
@@ -48,19 +48,79 @@ export default function HomePage() {
 					/* Disable scrolling on desktop for home page */
 					@media (min-width: 768px) {
 						body {
-							overflow: hidden;
+							overflow: auto;
 						}
 					}
 				`
 			}} />
 			{isBirthday && <Event event={EventType.BIRTHDAY} />}
-			<CenterPiece />
-			{/* Responsive positioning: negative margin on desktop, positive margin on mobile */}
-			<div className="flex justify-center items-center mt-8 sm:mt-16 md:-mt-48 mb-16 relative z-50">
-				<div className="w-full max-w-sm mx-auto px-4">
-					<Status.Widget />
+
+			{/* Main content with reduced spacing */}
+			<div className="flex flex-col items-center justify-start pt-10 pb-20">
+				{/* Center Piece */}
+				<div className="mb-12 w-full flex justify-center">
+					<CenterPiece />
+				</div>
+
+				{/* Git commits and Discord Status side by side */}
+				<div className="w-full flex flex-col md:flex-row justify-center gap-6 px-4">
+					{/* GitHub Contribution Graph */}
+					<div className="w-full md:w-1/2 relative z-40 flex justify-center">
+						<div className="inline-block p-4 md:p-6 relative z-50 w-full"
+							style={{
+								background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
+								WebkitBackdropFilter: 'blur(50px)',
+								backdropFilter: 'blur(50px)',
+								borderRadius: '50px',
+								borderColor: 'rgba(66, 66, 66, 0.25)',
+								borderWidth: '1.5px'
+							}}
+						>
+							<div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+								<h3
+									className="text-xl font-medium w-fit"
+									style={{
+										color: '#610000',
+										fontFamily: 'Minecraft, monospace',
+										textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+									}}
+								>
+									GitHub Contributions
+								</h3>
+							</div>
+							<GitHub.CommitGraph username="DebugBoard" monthsToShow={12} />
+						</div>
+					</div>
+
+					{/* Status Widget */}
+					<div className="w-full md:w-1/2 relative z-50 flex justify-center">
+						<div className="inline-block p-4 md:p-6 relative z-50 w-full"
+							style={{
+								background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
+								WebkitBackdropFilter: 'blur(50px)',
+								backdropFilter: 'blur(50px)',
+								borderRadius: '50px',
+								borderColor: 'rgba(66, 66, 66, 0.25)',
+								borderWidth: '1.5px'
+							}}
+						>
+							<div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+								<h3
+									className="text-xl font-medium w-fit"
+									style={{
+										color: '#610000',
+										fontFamily: 'Minecraft, monospace',
+										textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+									}}
+								>
+									Discord Status
+								</h3>
+							</div>
+							<Status.Widget />
+						</div>
+					</div>
 				</div>
 			</div>
-		</Layout.Default>
+		</Layout.Default >
 	);
 }
