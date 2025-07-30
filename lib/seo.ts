@@ -22,11 +22,11 @@ export function useSeoProps(
 			url: `https://debugboard.org${router.asPath}`,
 			type: 'website',
 			images: [
-				{
-					url: 'https://debugboard.org/banner.png',
+n 		{
+					url: 'https://debugboard.org/favicon.ico',
 					alt: description,
-					width: 1280,
-					height: 720,
+					width: 256,
+					height: 256,
 				},
 			],
 		},
