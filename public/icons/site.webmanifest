@@ -1,16 +1,16 @@
 {
-    "name": "WillyJL",
-    "short_name": "WillyJL",
+    "name": "DebugBoard",
+    "short_name": "DebugBoard",
     "icons": [
         {
-            "src": "/icons/android-chrome-192x192.png",
+            "src": "/favicon.ico",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/x-icon"
         },
         {
-            "src": "/icons/android-chrome-384x384.png",
+            "src": "/favicon.ico",
             "sizes": "384x384",
-            "type": "image/png"
+            "type": "image/x-icon"
         }
     ],
     "theme_color": "#0c0e10",

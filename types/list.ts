@@ -8,16 +8,17 @@ export enum ListActionType {
 interface ListActionBaseProps {
 	icon: string;
 	label: string;
+	title?: string;
 }
 
 export type ListAction =
 	| ({
-			type: ListActionType.BUTTON;
-			onClick: (event: MouseEvent) => void;
-	  } & ListActionBaseProps)
+		type: ListActionType.BUTTON;
+		onClick: (event: MouseEvent) => void;
+	} & ListActionBaseProps)
 	| ({
-			type: ListActionType.LINK;
-			external?: boolean;
-			href: string;
-			onClick?: (event: MouseEvent) => void;
-	  } & ListActionBaseProps);
+		type: ListActionType.LINK;
+		external?: boolean;
+		href: string;
+		onClick?: (event: MouseEvent) => void;
+	} & ListActionBaseProps);

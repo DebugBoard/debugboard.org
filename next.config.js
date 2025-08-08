@@ -1,5 +1,4 @@
 const WindiCSS = require('windicss-webpack-plugin');
-const { withAxiom } = require('next-axiom');
 
 const ContentSecurityPolicy = `
   child-src *.google.com streamable.com;
@@ -8,7 +7,7 @@ const ContentSecurityPolicy = `
   font-src 'self';
   img-src * blob: data:;
   media-src 'none';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' cdn.splitbee.io;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline';
   style-src 'self' 'unsafe-inline' *.googleapis.com;
   worker-src 'self' 'unsafe-inline' blob:;
 `;
@@ -18,23 +17,35 @@ const ContentSecurityPolicy = `
  */
 const config = {
 	images: {
-		domains: [
-			// Discord assets
-			'cdn.discordapp.com',
-			'media.discordapp.net',
-
-			// GitHub assets
-			'raw.githubusercontent.com',
-
-			// Spotify Album Art
-			'i.scdn.co',
-
-			// Streamable thumbnails
-			'cdn-cf-east.streamable.com',
-
-			// Unsplash
-			'source.unsplash.com',
-			'images.unsplash.com',
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'cdn.discordapp.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'media.discordapp.net',
+			},
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'i.scdn.co',
+			},
+			{
+				protocol: 'https',
+				hostname: 'cdn-cf-east.streamable.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'source.unsplash.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'images.unsplash.com',
+			},
 		],
 	},
 	// Inspired by: https://github.com/leerob/leerob.io/blob/main/next.config.js#L44-L81
@@ -69,7 +80,6 @@ const config = {
 		];
 	},
 	reactStrictMode: true,
-	swcMinify: true,
 	webpack: (config, { dev, isServer }) => {
 		// TODO: Temp disabled as since upgrading `next` to v12.2.3 production builds fail & this seems to be the cause
 		// Replace React with Preact only in client production build
@@ -92,4 +102,4 @@ const config = {
 	},
 };
 
-module.exports = withAxiom(config);
+module.exports = config;

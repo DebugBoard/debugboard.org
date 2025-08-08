@@ -158,13 +158,13 @@ export function Widget() {
 										<p className="mt-0 mb-1 text-xs tracking-wide font-medium text-gray-300">
 											Playing
 										</p>
-										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white">
+										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white" style={{ fontFamily: index === 0 ? 'Comfortaa, sans-serif' : undefined, fontWeight: index === 0 ? 600 : undefined }}>
 											{activity.title}
 										</h1>
 									</>
 								) : Array.isArray(activity.description) ? (
 									<>
-										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white">
+										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white" style={{ fontFamily: index === 0 ? 'Comfortaa, sans-serif' : undefined, fontWeight: index === 0 ? 600 : undefined }}>
 											{activity.title}
 										</h1>
 										{activity.description.map(
@@ -180,13 +180,14 @@ export function Widget() {
 									</>
 								) : (
 									<>
-										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white">
-											{activity.title} {index === 0 && (
-												<span className="mt-1 text-sm tracking-wide font-medium text-gray-300">
-													{`(${status.discord_user.username})`}
-												</span>
-											)}
+										<h1 className="text-base font-extrabold line-clamp-1 tracking-wide overflow-ellipsis text-white" style={{ fontFamily: index === 0 ? 'Comfortaa, sans-serif' : undefined, fontWeight: index === 0 ? 600 : undefined }}>
+											{activity.title}
 										</h1>
+										{index === 0 && (
+											<p className="mt-1 text-xs tracking-wide font-medium text-gray-300">
+												@{status.discord_user.username}
+											</p>
+										)}
 										<p className="mt-1 text-xs tracking-wide font-medium text-gray-300">
 											{index === 0 && custom && custom.emoji && (
 												<img style={{ display: 'inline', marginRight: '4px' }} src={`https://cdn.discordapp.com/emojis/${custom.emoji.id}.${custom.emoji.animated ? 'gif' : 'png'}?size=20&quality=lossless`} />

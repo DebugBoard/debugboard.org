@@ -7,7 +7,8 @@ export function useClick() {
 		volume: 0.05,
 	});
 
-	if (!state.get().sound) return [() => {}, null];
+	// Return no-op function during SSR or when sound is disabled
+	if (!state.isClient || !state.get().sound) return [() => {}, null];
 
 	return result;
 }

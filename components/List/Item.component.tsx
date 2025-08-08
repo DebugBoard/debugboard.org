@@ -59,6 +59,7 @@ export function Item({ actions, children, description, icon, iconColor, title }:
 											aria-label={action.label}
 											key={index}
 											onClick={action.onClick}
+											title={action.title}
 										>
 											<span className="sr-only">{action.label}</span>
 											<Icon icon={action.icon} />
@@ -75,6 +76,7 @@ export function Item({ actions, children, description, icon, iconColor, title }:
 												onClick={action.onClick}
 												rel="noopener noreferrer"
 												target="_blank"
+												title={action.title}
 											>
 												<span className="sr-only">{action.label}</span>
 												<Icon icon={action.icon} />
@@ -82,17 +84,17 @@ export function Item({ actions, children, description, icon, iconColor, title }:
 										);
 
 									return (
-										<Link href={action.href} passHref>
-											<Action
-												as="a"
-												aria-label={action.label}
-												key={index}
-												onClick={action.onClick}
-											>
-												<span className="sr-only">{action.label}</span>
-												<Icon icon={action.icon} />
-											</Action>
-										</Link>
+										<Action
+											as={Link}
+											href={action.href}
+											aria-label={action.label}
+											key={index}
+											onClick={action.onClick}
+											title={action.title}
+										>
+											<span className="sr-only">{action.label}</span>
+											<Icon icon={action.icon} />
+										</Action>
 									);
 							}
 						})}

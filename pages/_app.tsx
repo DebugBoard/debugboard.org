@@ -1,11 +1,10 @@
 import NProgress from 'nprogress';
-import splitbee from '@splitbee/web';
 import { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
 import { useEffectOnce, useEvent } from 'react-use';
 import { useRouter } from 'next/router';
+import { Analytics } from '@vercel/analytics/next';
 
-import 'inter-ui/inter.css';
 import 'nprogress/nprogress.css';
 import 'windi.css';
 
@@ -19,7 +18,7 @@ NProgress.configure({
 	speed: 800,
 });
 
-export { reportWebVitals } from 'next-axiom';
+// Removed next-axiom reportWebVitals export due to hook call issues
 
 export default function App({ Component, pageProps }: AppProps) {
 	const router = useRouter();
@@ -32,23 +31,33 @@ export default function App({ Component, pageProps }: AppProps) {
 		router.events.on('routeChangeStart', () => NProgress.start());
 		router.events.on('routeChangeComplete', () => NProgress.done());
 		router.events.on('routeChangeError', () => NProgress.done());
-
-		if (process.env.NODE_ENV === 'production')
-			splitbee.init({
-				disableCookie: true,
-			});
 	});
 
 	return (
 		<ThemeProvider attribute="class" defaultTheme={Theme.SYSTEM} themes={Object.values(Theme)}>
 			<Component {...pageProps} />
-			<style>{`
+			<Analytics />
+			<style jsx global>{`
+				@font-face {
+					font-family: 'Comfortaa';
+					src: url('/Comfortaa-Regular.ttf') format('truetype');
+					font-weight: normal;
+					font-style: normal;
+					font-display: swap;
+				}
+				.font-comfortaa {
+					font-family: 'Comfortaa', 'Arial', sans-serif !important;
+				}
 				#nprogress .bar {
 					height: 0.25rem;
-					background-color: ${colors.primary[500]};
+					background-color: #b91c1c;
 				}
-				#tsparticles > canvas {
-					filter: var(--tsparticles-blur);
+				#nprogress .peg {
+					box-shadow: 0 0 10px #b91c1c, 0 0 5px #b91c1c;
+				}
+				#nprogress .spinner-icon {
+					border-top-color: #b91c1c;
+					border-left-color: #b91c1c;
 				}
 			`}</style>
 		</ThemeProvider>

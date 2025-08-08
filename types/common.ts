@@ -1,4 +1,5 @@
 import type { ComponentProps, JSXElementConstructor, PropsWithChildren } from 'react';
+import React from 'react';
 
 /**
  * With Children
@@ -61,6 +62,6 @@ export type WithClassName<T = {}> = T & {
  * ```
  */
 export type WithProps<
-	T extends keyof JSX.IntrinsicElements | JSXElementConstructor<U>,
+	T extends keyof React.JSX.IntrinsicElements | JSXElementConstructor<U>,
 	U = any,
 > = ComponentProps<T>;

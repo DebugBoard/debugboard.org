@@ -11,6 +11,7 @@ interface NaviationItemBase {
 export enum NavigationItemType {
 	ACTION = 'action',
 	LINK = 'link',
+	CUSTOM = 'custom',
 }
 
 export type NavigationItem =
@@ -20,6 +21,10 @@ export type NavigationItem =
 	| ({
 		external?: boolean;
 		type: NavigationItemType.LINK;
-	} & NaviationItemBase);
+	} & NaviationItemBase)
+	| ({
+		type: NavigationItemType.CUSTOM;
+		component: ReactNode;
+	});
 
 export type NavigationItems = Array<Array<NavigationItem>>;

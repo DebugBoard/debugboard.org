@@ -26,6 +26,7 @@ export default defineConfig({
 			colors,
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans],
+				comfortaa: ['Comfortaa', 'Arial', 'sans-serif'],
 			},
 			keyframes: {
 				wave: {

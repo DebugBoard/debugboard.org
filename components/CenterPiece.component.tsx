@@ -20,10 +20,16 @@ export default function CenterPiece() {
           ::-webkit-scrollbar {
             display: none;
           }
+          /* Ensure proper spacing on mobile */
+          @media (max-width: 767px) {
+            .center-piece-container {
+              padding-bottom: 2rem;
+            }
+          }
         `
       }} />
 
-      <div className="flex w-full flex-col items-center justify-center relative z-10" style={{ maxWidth: '505px' }}>
+      <div className="flex w-full flex-col items-center justify-center relative z-1 center-piece-container" style={{ maxWidth: '505px' }}>
         <div
           style={{
             background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
@@ -33,10 +39,10 @@ export default function CenterPiece() {
             borderColor: 'rgba(66, 66, 66, 0.25)',
             borderWidth: '1.5px'
           }}
-          className="relative h-fit w-full z-50 mt-12"
+          className="relative h-fit w-full z-2 mt-12"
         >
           {/* Profile Picture - positioned relative to the card */}
-          <div className="absolute -top-[60px] left-0 right-0 z-[100] flex items-center justify-center">
+          <div className="absolute -top-[60px] left-0 right-0 z-3 flex items-center justify-center">
             <img
               alt="Profile Image"
               loading="eager"
@@ -53,7 +59,7 @@ export default function CenterPiece() {
           <div className="relative w-full flex-col items-center justify-center p-6 pt-20">
 
             <div className="relative mx-auto flex w-fit flex-col items-center gap-1">
-              <div className="group relative z-10 w-fit">
+              <div className="group relative z-1 w-fit">
                 <div className="relative">
                   <h2
                     className="relative w-fit text-wrap break-all bg-transparent text-[28px] font-medium tracking-wider"
@@ -81,7 +87,7 @@ export default function CenterPiece() {
             >
               <div className="mx-auto flex w-full flex-wrap items-center justify-center gap-4">
                 {/* NameMC */}
-                <div className="group relative z-10 w-fit">
+                <div className="group relative z-1 w-fit">
                   <button onClick={() => window.location.href = 'https://NameMC.com/profile/DebugBoard.1?'}>
                     <div>
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" role="img" viewBox="0 0 24 24" className="duration-300 hover:scale-110" style={{ color: '#6b0000' }} height="45" width="45" xmlns="http://www.w3.org/2000/svg">
@@ -92,7 +98,7 @@ export default function CenterPiece() {
                 </div>
 
                 {/* GitHub */}
-                <div className="group relative z-10 w-fit">
+                <div className="group relative z-1 w-fit">
                   <button onClick={() => window.location.href = 'https://github.com/DebugBoard'}>
                     <div>
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" role="img" viewBox="0 0 24 24" className="duration-300 hover:scale-110" style={{ color: '#6b0000' }} height="45" width="45" xmlns="http://www.w3.org/2000/svg">
@@ -103,7 +109,7 @@ export default function CenterPiece() {
                 </div>
 
                 {/* Discord */}
-                <div className="group relative z-10 w-fit">
+                <div className="group relative z-1 w-fit">
                   <button onClick={() => window.location.href = 'https://discord.com/users/993915202376572939'}>
                     <div>
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" role="img" viewBox="0 0 24 24" className="duration-300 hover:scale-110" style={{ color: '#6b0000' }} height="45" width="45" xmlns="http://www.w3.org/2000/svg">
@@ -114,7 +120,7 @@ export default function CenterPiece() {
                 </div>
 
                 {/* Reddit */}
-                <div className="group relative z-10 w-fit">
+                <div className="group relative z-1 w-fit">
                   <button onClick={() => window.location.href = 'https://www.reddit.com/user/WesternImpression394/'}>
                     <div>
                       <svg stroke="currentColor" fill="currentColor" strokeWidth="0" role="img" viewBox="0 0 24 24" className="duration-300 hover:scale-110" style={{ color: '#6b0000' }} height="45" width="45" xmlns="http://www.w3.org/2000/svg">

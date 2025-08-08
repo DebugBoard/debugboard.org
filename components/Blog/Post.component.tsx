@@ -16,12 +16,11 @@ export function _Post({ index, frontmatter }: PostProps) {
 	const href = `/blog/${frontmatter.slug}`;
 
 	return (
-		<Link aria-label={ariaLabel} href={href} passHref>
-			<a
-				aria-label={ariaLabel}
-				className="flex flex-col bg-white bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter backdrop-blur-sm border-2 border-gray-200 dark:border-gray-600 rounded-2xl overflow-hidden hover:shadow-xl cursor-pointer transform motion-safe:hover:-translate-y-1 default-transition default-focus"
-				href={href}
-			>
+		<Link 
+			aria-label={ariaLabel} 
+			href={href}
+			className="flex flex-col bg-white bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter backdrop-blur-sm border-2 border-gray-200 dark:border-gray-600 rounded-2xl overflow-hidden hover:shadow-xl cursor-pointer transform motion-safe:hover:-translate-y-1 default-transition default-focus"
+		>
 				{frontmatter.banner && (
 					<div className="relative flex justify-center w-full my-auto rounded-t-lg overflow-hidden">
 						<div className="w-full h-full h-48 bg-gray-200 dark:bg-gray-600 motion-safe:animate-pulse" />
@@ -59,7 +58,6 @@ export function _Post({ index, frontmatter }: PostProps) {
 						</div>
 					</div>
 				</div>
-			</a>
 		</Link>
 	);
 }

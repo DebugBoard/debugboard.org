@@ -29,18 +29,12 @@ export default function ProjectsPage({ stringifiedProjects }: ProjectProps) {
 	if (projects.length === 0) return <ErrorPage title="There's nothing here" message="Sorry, there are no projects listed for now. Check back later!" />;
 
 	return (
-		<Layout.Default seo={{ title: 'WillyJL ─ Projects' }}>
+		<Layout.Default seo={{ title: 'DebugBoard ─ Projects' }}>
 			<div className="my-24 mx-2 sm:mx-6 lg:mb-28 lg:mx-8">
 				<div className="relative max-w-xl mx-auto">
 					<List.Container>
 						{projects.map((project, index) => (
-							<Animate
-								animation={{ y: [50, 0], opacity: [0, 1] }}
-								key={index}
-								transition={{
-									delay: 0.1 * index,
-								}}
-							>
+							<div key={index}>
 								<List.Item
 									actions={[
 										...(project.homepage
@@ -53,18 +47,26 @@ export default function ProjectsPage({ stringifiedProjects }: ProjectProps) {
 												} as ListAction,
 											]
 											: []),
-										{
-											type: ListActionType.LINK,
-											href: project.url,
-											icon: 'feather:github',
-											label: 'GitHub Repository',
-										},
+										...(project.private
+											? [{
+												type: ListActionType.BUTTON,
+												icon: 'feather:lock',
+												label: 'Private Repository',
+												title: 'Private',
+												onClick: () => { }, // Do nothing when clicked
+											} as ListAction]
+											: [{
+												type: ListActionType.LINK,
+												href: project.url,
+												icon: 'feather:github',
+												label: 'GitHub Repository',
+											} as ListAction]),
 									]}
 									description={project.description}
 									icon={<span className="text-xl">{project.icon}</span>}
 									title={<span className="text-primary-400 dark:text-primary-300">{project.name}</span>}
 								/>
-							</Animate>
+							</div>
 						))}
 					</List.Container>
 				</div>

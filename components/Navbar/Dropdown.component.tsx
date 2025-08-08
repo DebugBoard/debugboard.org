@@ -31,19 +31,32 @@ const StyledMenuItem = forwardRef<any, MenuLinkProps>(function StyledMenuItem(
 	ref,
 ) {
 	return (
-		<a
-			className={clsx(
-				'flex items-center px-4 py-3 text-sm font-medium tracking-wide cursor-pointer default-transition',
-				active
-					? 'bg-gray-100 bg-opacity-50 text-black dark:(bg-gray-700 bg-opacity-50 text-white)'
-					: 'text-gray-500 dark:text-gray-300',
-				className,
-			)}
-			ref={ref}
-			{...rest}
-		>
-			{children}
-		</a>
+		<div className="mx-2 my-2">
+			<a
+				className={clsx(
+					'flex items-center px-4 py-3 text-sm font-medium tracking-wide cursor-pointer transition-all duration-300 rounded-2xl whitespace-nowrap',
+					active
+						? 'text-white'
+						: 'text-gray-300 hover:text-white',
+					className,
+				)}
+				style={{
+					fontFamily: 'Comfortaa, Arial, sans-serif',
+					background: active
+						? 'rgba(255, 255, 255, 0.15)'
+						: 'rgba(255, 255, 255, 0.05)',
+					backdropFilter: 'blur(10px)',
+					border: '1px solid rgba(255, 255, 255, 0.1)',
+					boxShadow: active
+						? '0 4px 15px rgba(0, 0, 0, 0.2)'
+						: '0 2px 10px rgba(0, 0, 0, 0.1)'
+				}}
+				ref={ref}
+				{...rest}
+			>
+				{children}
+			</a>
+		</div>
 	);
 });
 
@@ -61,13 +74,35 @@ function MenuButtonIcon({ className, icon, direction: type = 'left' }: MenuButto
  *
  * @see https://headlessui.dev/react/menu#integrating-with-next-js
  */
-function MenuLink({ children, href, onClick, ...rest }: MenuLinkProps) {
+function MenuLink({ children, href, onClick, active, className, ...rest }: MenuLinkProps) {
 	return (
-		<Link href={href} passHref>
-			<StyledMenuItem onClick={(...args) => onClick(...args)} {...rest}>
+		<div className="mx-2 my-2">
+			<Link
+				href={href}
+				onClick={(...args) => onClick(...args)}
+				className={clsx(
+					'flex items-center px-4 py-3 text-sm font-medium tracking-wide cursor-pointer transition-all duration-300 rounded-2xl whitespace-nowrap',
+					active
+						? 'text-white'
+						: 'text-gray-300 hover:text-white',
+					className,
+				)}
+				style={{
+					fontFamily: 'Comfortaa, Arial, sans-serif',
+					background: active
+						? 'rgba(255, 255, 255, 0.15)'
+						: 'rgba(255, 255, 255, 0.05)',
+					backdropFilter: 'blur(10px)',
+					border: '1px solid rgba(255, 255, 255, 0.1)',
+					boxShadow: active
+						? '0 4px 15px rgba(0, 0, 0, 0.2)'
+						: '0 2px 10px rgba(0, 0, 0, 0.1)'
+				}}
+				{...rest}
+			>
 				{children}
-			</StyledMenuItem>
-		</Link>
+			</Link>
+		</div>
 	);
 }
 
@@ -90,13 +125,22 @@ export function Dropdown({ children, items, position = 'top-left' }: StandardPro
 					>
 						<Menu.Items
 							className={clsx(
-								'absolute w-[calc(100vw-1rem)] sm:w-56 mt-2 bg-gray-50 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-75 backdrop-filter backdrop-blur-sm border-2 border-gray-200 dark:border-gray-600 rounded-md shadow-lg divide-y-2 divide-gray-200 dark:divide-gray-600 focus:outline-none',
+								'absolute w-[calc(100vw-1rem)] sm:w-72 mt-2 focus:outline-none p-3',
 								position === 'top-left' && 'origin-top-left left-0',
 								position === 'top-right' && 'origin-top-right right-0',
 							)}
+							style={{
+								background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))',
+								WebkitBackdropFilter: 'blur(50px)',
+								backdropFilter: 'blur(50px)',
+								borderRadius: '25px',
+								borderColor: 'rgba(66, 66, 66, 0.25)',
+								borderWidth: '1.5px',
+								boxShadow: '0 0 10px rgba(0,0,0,0.1)'
+							}}
 						>
 							{items.map((section, index) => (
-								<div className="py-2" key={index}>
+								<div key={index}>
 									{section.map((item, j) => (
 										<Menu.Item key={j}>
 											{({ active }) => {
@@ -152,6 +196,23 @@ export function Dropdown({ children, items, position = 'top-left' }: StandardPro
 																<MenuButtonIcon icon={item.icon} />
 																{item.text}
 															</MenuLink>
+														);
+													case NavigationItemType.CUSTOM:
+														return (
+															<div className="mx-2 my-2">
+																<div
+																	className="flex items-center px-4 py-3 text-sm font-medium tracking-wide transition-all duration-300 rounded-2xl whitespace-nowrap"
+																	style={{
+																		fontFamily: 'Comfortaa, Arial, sans-serif',
+																		background: 'rgba(255, 255, 255, 0.05)',
+																		backdropFilter: 'blur(10px)',
+																		border: '1px solid rgba(255, 255, 255, 0.1)',
+																		boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
+																	}}
+																>
+																	{item.component}
+																</div>
+															</div>
 														);
 												}
 											}}

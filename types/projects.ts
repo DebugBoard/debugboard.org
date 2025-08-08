@@ -116,6 +116,7 @@ export interface Project {
 	icon?: string;
 	language?: string;
 	name: string;
+	private?: boolean;
 	template?: boolean;
 	url: string;
 }

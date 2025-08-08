@@ -1,95 +1,55 @@
-import { loadParticlesRepulseInteraction } from 'tsparticles-interaction-particles-repulse';
-import { Engine, tsParticles } from 'tsparticles-engine';
-import Particles from 'react-particles';
-import { loadFull } from 'tsparticles';
-import { CSSProperties } from 'react';
-
-import { colors } from '~/lib';
+import { useEffect, useState } from 'react';
+import { useTheme } from 'next-themes';
 
 export function Standard({ blur = 0 }) {
+	const { resolvedTheme } = useTheme();
+	const [backgroundSrc, setBackgroundSrc] = useState('');
+	const [mounted, setMounted] = useState(false);
 
-	async function init(engine: Engine) {
-		await loadFull(engine);
-		loadParticlesRepulseInteraction(tsParticles);
+	// Ensure component is mounted to avoid hydration mismatch
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	useEffect(() => {
+		if (!mounted) return;
+
+		// Determine which background to use based on theme
+		const isLightMode = resolvedTheme === 'light';
+		
+		// Choose appropriate GIF and static image based on theme
+		const initialGif = isLightMode ? '/images/backlight.gif' : '/images/back.gif';
+		const staticImage = isLightMode ? '/images/backlight.jpg' : '/images/back.png';
+		
+		// Start with GIF
+		setBackgroundSrc(initialGif);
+		
+		// Switch to static image after 5 seconds (when GIF finishes)
+		const timer = setTimeout(() => {
+			setBackgroundSrc(staticImage);
+		}, 5000);
+		
+		return () => clearTimeout(timer);
+	}, [mounted, resolvedTheme]);
+
+	if (!mounted || !backgroundSrc) {
+		return null;
 	}
 
-	const options = {
-		detectRetina: true,
-		interactivity: {
-			events: {
-				onClick: {
-					enable: false,
-				},
-				onHover: {
-					enable: true,
-					mode: 'repulse',
-					parallax: {
-						enable: true,
-						force: 80,
-						smooth: 80,
-					},
-				},
-				resize: true,
-			},
-			modes: {
-				repulse: {
-					distance: 200,
-					duration: 0,
-					factor: 5,
-					speed: 1,
-				},
-			},
-		},
-		particles: {
-			color: {
-				value: colors.primary[500],
-			},
-			links: {
-				enable: true,
-				color: {
-					value: colors.primary[500],
-				},
-				distance: 120,
-				opacity: 0.4,
-				width: 2,
-			},
-			move: {
-				enable: true,
-				random: true,
-				speed: 3,
-			},
-			number: {
-				value: 60,
-				density: {
-					enable: true,
-					area: 1000,
-				},
-			},
-			opacity: {
-				value: {
-					max: 0.8,
-					min: 0.1,
-				},
-				animation: {
-					enable: true,
-					speed: 0.4,
-				},
-			},
-			shape: {
-				type: 'circle',
-			},
-			size: {
-				value: {
-					max: 10,
-					min: 1,
-				},
-				animation: {
-					enable: true,
-					speed: 5,
-				},
-			},
-		},
-	};
-
-	return <Particles style={{ '--tsparticles-blur': (blur ? `blur(${blur}px)` : 'none') } as CSSProperties} options={options} init={init} />;
+	return (
+			<img
+				src={backgroundSrc}
+				alt=""
+				style={{
+					position: 'fixed',
+					top: 0,
+					left: 0,
+					width: '100%',
+					height: '100%',
+					objectFit: 'cover',
+					zIndex: -1,
+					filter: blur ? `blur(${blur}px)` : 'none',
+				}}
+			/>
+		);
 }

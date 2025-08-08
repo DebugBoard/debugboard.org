@@ -1,4 +1,5 @@
 import { useTheme } from 'next-themes';
+import { ThemeToggle } from '~/components/ThemeToggle.component';
 
 import { Status } from '~/components';
 import { usePersistantState, useStatus } from '~/lib';
@@ -80,25 +81,8 @@ export function useNavigation() {
 		],
 		[
 			{
-				type: NavigationItemType.ACTION,
-				icon: 'feather:monitor',
-				endIcon: theme === Theme.SYSTEM ? 'feather:check-circle' : undefined,
-				text: 'System Theme',
-				onClick: () => setTheme(Theme.SYSTEM),
-			},
-			{
-				type: NavigationItemType.ACTION,
-				icon: 'feather:sun',
-				endIcon: theme === Theme.LIGHT ? 'feather:check-circle' : undefined,
-				text: 'Light Theme',
-				onClick: () => setTheme(Theme.LIGHT),
-			},
-			{
-				type: NavigationItemType.ACTION,
-				icon: 'feather:moon',
-				endIcon: theme === Theme.DARK ? 'feather:check-circle' : undefined,
-				text: 'Dark Theme',
-				onClick: () => setTheme(Theme.DARK),
+				type: NavigationItemType.CUSTOM,
+				component: <ThemeToggle />,
 			},
 		],
 	];

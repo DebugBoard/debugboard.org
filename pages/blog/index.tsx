@@ -30,27 +30,32 @@ export default function BlogPage({ serialisedFrontmatters }: BlogProps) {
 	const latestPost = frontmatters.shift();
 
 	return (
-		<Layout.Default seo={{ title: 'WillyJL ─ Blog' }}>
+		<Layout.Default seo={{
+			title: 'Blog - Transparency Guides & Software Engineering Tutorials',
+			description: 'Discover comprehensive guides on making Discord, Spotify, Obsidian, and Zen Browser transparent. Learn software engineering, web development, and application customization with step-by-step tutorials.',
+			additionalMetaTags: [
+				{
+					name: 'keywords',
+					content: 'transparency guides, Discord transparent, Spotify transparent, Obsidian transparent, Zen Browser, software engineering blog, programming tutorials, web development, CSS themes, Windows customization, Vencord, application transparency',
+				},
+			],
+			openGraph: {
+				title: 'DebugBoard Blog - Transparency Guides & Software Engineering',
+				description: 'Comprehensive guides on application transparency and software engineering tutorials',
+				type: 'website',
+			},
+		}}>
 			<div className="mt-8 sm:mt-16 mb-20 mx-0 sm:mx-6 lg:mb-28 lg:mx-8">
 				<div className="relative max-w-6xl mx-auto">
-					<Animate
-						animation={{ y: [50, 0], opacity: [0, 1] }}
-						key={0}
-					>
-						<Blog.Latest frontmatter={latestPost} />
-					</Animate>
-					<div className="mt-4 lg:mt-12 grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:max-w-none">
-						{frontmatters.map((frontmatter, i) => (
-							<Animate
-								animation={{ y: [50, 0], opacity: [0, 1] }}
-								key={i + 1}
-								transition={{
-									delay: 0.1 * (i + 1),
-								}}
-							>
-								<Blog.Post key={i} frontmatter={frontmatter} index={i} />
-							</Animate>
-						))}
+					<div>
+					<Blog.Latest frontmatter={latestPost} />
+				</div>
+				<div className="mt-4 lg:mt-12 grid gap-5 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:max-w-none">
+					{frontmatters.map((frontmatter, i) => (
+						<article key={i}>
+							<Blog.Post key={i} frontmatter={frontmatter} index={i} />
+						</article>
+					))}
 					</div>
 				</div>
 			</div>

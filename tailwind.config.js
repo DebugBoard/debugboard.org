@@ -37,6 +37,7 @@ module.exports = {
 			},
 			fontFamily: {
 				inter: ['Inter', ...defaultTheme.fontFamily.sans],
+				minecraft: ['minecraft', 'monospace'],
 			},
 		},
 	},

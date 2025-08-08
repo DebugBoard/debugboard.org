@@ -3,14 +3,10 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ElementType } from 're
 
 type ActionProps = {
 	as?: ElementType;
-} & (
-		| ({
-			as?: 'button';
-		} & ButtonHTMLAttributes<HTMLButtonElement>)
-		| ({
-			as?: 'a';
-		} & AnchorHTMLAttributes<HTMLAnchorElement>)
-	);
+	children?: React.ReactNode;
+	className?: string;
+	[key: string]: any;
+};
 
 export function Action({ as: Component = 'button', children, className, ...rest }: ActionProps) {
 	return (
